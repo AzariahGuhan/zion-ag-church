@@ -7,9 +7,11 @@ import { Menu, X } from "lucide-react";
 const links = [
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
+  { label: "Events", href: "#events" },
   { label: "Ministries", href: "#ministries" },
   { label: "Sermons", href: "#sermons" },
   { label: "Give", href: "#give" },
+  { label: "Prayer", href: "#prayer" },
   { label: "Contact", href: "#contact" },
 ];
 
