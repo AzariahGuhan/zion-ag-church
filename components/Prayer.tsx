@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const ACCESS_KEY = "PASTE_ACCESS_KEY_HERE";
+const ACCESS_KEY = "84c8d8c6-4acf-4468-8bc4-bf8ff032a245";
 
 export default function Prayer() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
