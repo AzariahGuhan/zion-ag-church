@@ -1,36 +1,73 @@
-// Add upcoming events here. Delete old ones when they pass.
-const events: { title: string; date: string; time: string; text: string }[] = [
-  // {
-  //   title: "Christmas Service",
-  //   date: "Thursday, 25 December 2026",
-  //   time: "9:00 AM",
-  //   text: "Join us as we celebrate the birth of Jesus.",
-  // },
+type EventItem = {
+  title: string;
+  poster: string;
+  date?: string;
+  time?: string;
+  place?: string;
+  text?: string;
+};
+
+// SAMPLE posters. Add date, time and place for each event, and delete
+// events that have already passed.
+const events: EventItem[] = [
+  {
+    title: "December Promise Service",
+    poster: "/events/december-promise-service.jpg",
+    // date: "",
+    // time: "",
+    // place: "",
+  },
+  {
+    title: "Evening Service",
+    poster: "/events/evening-service.jpg",
+  },
+  {
+    title: "New Year Service",
+    poster: "/events/new-year-service.jpg",
+  },
+  {
+    title: "September Service",
+    poster: "/events/september-service.jpg",
+  },
 ];
 
 export default function Events() {
   return (
     <section id="events" className="bg-black px-6 py-28 text-white">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-6xl">
         <div className="text-center">
           <p className="mb-4 text-xs uppercase tracking-[0.5em] text-white/60">
             What&apos;s Happening
           </p>
-          <h2 className="text-4xl font-bold sm:text-5xl">Events &amp; Announcements</h2>
+          <h2 className="text-4xl font-bold sm:text-5xl">Upcoming Events</h2>
         </div>
 
         {events.length > 0 ? (
-          <div className="mt-14 grid gap-6 sm:grid-cols-2">
+          <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {events.map((e) => (
               <div
-                key={e.title + e.date}
-                className="rounded-2xl border border-white/10 bg-white/5 p-8"
+                key={e.title}
+                className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
               >
-                <p className="text-sm uppercase tracking-widest text-white/60">
-                  {e.date} · {e.time}
-                </p>
-                <h3 className="mt-2 text-2xl font-semibold">{e.title}</h3>
-                <p className="mt-3 leading-7 text-white/70">{e.text}</p>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={e.poster}
+                  alt={`${e.title} poster`}
+                  loading="lazy"
+                  className="w-full object-cover"
+                />
+                <div className="p-5">
+                  <h3 className="text-xl font-semibold">{e.title}</h3>
+                  {(e.date || e.time) && (
+                    <p className="mt-2 text-sm uppercase tracking-widest text-white/60">
+                      {[e.date, e.time].filter(Boolean).join(" · ")}
+                    </p>
+                  )}
+                  {e.place && <p className="mt-2 text-white/80">{e.place}</p>}
+                  {e.text && (
+                    <p className="mt-2 text-sm leading-6 text-white/70">{e.text}</p>
+                  )}
+                </div>
               </div>
             ))}
           </div>
