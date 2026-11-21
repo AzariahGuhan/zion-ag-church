@@ -1,3 +1,9 @@
+"use client";
+
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import Lightbox from "@/components/Lightbox";
+
 type EventItem = {
   title: string;
   poster: string;
@@ -32,6 +38,10 @@ const events: EventItem[] = [
 ];
 
 export default function Events() {
+  const [active, setActive] = useState<{ src: string; alt: string } | null>(
+    null
+  );
+
   return (
     <section id="events" className="bg-black px-6 py-28 text-white">
       <div className="mx-auto max-w-6xl">
@@ -49,13 +59,22 @@ export default function Events() {
                 key={e.title}
                 className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={e.poster}
-                  alt={`${e.title} poster`}
-                  loading="lazy"
-                  className="w-full object-cover"
-                />
+                <button
+                  type="button"
+                  onClick={() =>
+                    setActive({ src: e.poster, alt: `${e.title} poster` })
+                  }
+                  aria-label={`Open ${e.title} poster full size`}
+                  className="block w-full cursor-zoom-in"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={e.poster}
+                    alt={`${e.title} poster`}
+                    loading="lazy"
+                    className="w-full object-cover transition duration-500 hover:scale-[1.02]"
+                  />
+                </button>
                 <div className="p-5">
                   <h3 className="text-xl font-semibold">{e.title}</h3>
                   {(e.date || e.time) && (
@@ -65,7 +84,9 @@ export default function Events() {
                   )}
                   {e.place && <p className="mt-2 text-white/80">{e.place}</p>}
                   {e.text && (
-                    <p className="mt-2 text-sm leading-6 text-white/70">{e.text}</p>
+                    <p className="mt-2 text-sm leading-6 text-white/70">
+                      {e.text}
+                    </p>
                   )}
                 </div>
               </div>
@@ -78,6 +99,16 @@ export default function Events() {
           </p>
         )}
       </div>
+
+      <AnimatePresence>
+        {active && (
+          <Lightbox
+            src={active.src}
+            alt={active.alt}
+            onClose={() => setActive(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }
