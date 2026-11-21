@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Gallery from "@/components/Gallery";
-import Contact from "@/components/Contact";
 
 export const metadata: Metadata = {
   title: "Gallery | Zion AG Church",
@@ -15,7 +14,6 @@ export default function GalleryPage() {
       <div className="pt-12">
         <Gallery />
       </div>
-      <Contact />
     </main>
   );
 }

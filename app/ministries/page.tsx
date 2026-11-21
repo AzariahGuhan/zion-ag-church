@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Ministries from "@/components/Ministries";
-import Contact from "@/components/Contact";
 
 export const metadata: Metadata = {
   title: "Ministries | Zion AG Church",
@@ -15,7 +14,6 @@ export default function MinistriesPage() {
       <div className="pt-16">
         <Ministries />
       </div>
-      <Contact />
     </main>
   );
 }

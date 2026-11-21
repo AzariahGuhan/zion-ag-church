@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Prayer from "@/components/Prayer";
-import Contact from "@/components/Contact";
 
 export const metadata: Metadata = {
   title: "Prayer Request | Zion AG Church",
@@ -15,7 +14,6 @@ export default function PrayerPage() {
       <div className="pt-16">
         <Prayer />
       </div>
-      <Contact />
     </main>
   );
 }
