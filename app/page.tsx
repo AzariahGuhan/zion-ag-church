@@ -1,3 +1,4 @@
+import Contact from "@/components/Contact";
 import Navbar from "@/components/Navbar";
 import HomeHero from "@/components/HomeHero";
 import SermonsPreview from "@/components/SermonsPreview";
@@ -10,6 +11,7 @@ export default function Home() {
       <HomeHero />
       <SermonsPreview />
       <HomeCards />
+      <Contact />
     </main>
   );
 }
