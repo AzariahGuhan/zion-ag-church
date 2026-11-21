@@ -5,6 +5,7 @@
   --font-display: var(--font-bebas);
 }
 
+/* Smooth scroll (Lenis) */
 html.lenis,
 html.lenis body {
   height: auto;
@@ -89,4 +90,49 @@ button.rounded-full {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+/* Button lift and press */
+a.rounded-full.bg-white,
+a.rounded-full.border {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.3s;
+}
+a.rounded-full.bg-white:hover,
+a.rounded-full.border:hover {
+  transform: translateY(-2px);
+}
+a.rounded-full.bg-white:active,
+a.rounded-full.border:active {
+  transform: scale(0.97);
+}
+
+/* Glass cards with a soft green glow and a lift on hover */
+.rounded-2xl.border.bg-white\/5 {
+  border-radius: 1.5rem;
+  border-color: rgb(255 255 255 / 0.1);
+  background: linear-gradient(
+    180deg,
+    rgb(255 255 255 / 0.07),
+    rgb(255 255 255 / 0.03)
+  );
+  transition:
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s,
+    box-shadow 0.4s;
+}
+.rounded-2xl.border.bg-white\/5:hover {
+  transform: translateY(-6px);
+  border-color: rgb(140 190 130 / 0.4);
+  box-shadow: 0 0 60px -12px rgb(90 150 90 / 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
