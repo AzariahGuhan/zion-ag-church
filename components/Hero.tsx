@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
-const letters = "ZION AG".split("");
+const letters = "ZION AG CHURCH".split("");
 
 export default function Hero() {
   return (
