@@ -1,4 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+export const viewport: Viewport = {
+  viewportFit: "cover",
+  themeColor: "#000000",
+};
 import { Bebas_Neue, Montserrat } from "next/font/google";
 import SmoothScroll from "@/components/SmoothScroll";
 import ScrollProgress from "@/components/ScrollProgress";
