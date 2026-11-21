@@ -27,9 +27,9 @@ export default function Hero() {
     >
       {/* Background video: /public/media/hero.mp4 */}
       <motion.div
-        style={{ y: videoY, scale: videoScale }}
-        className="absolute inset-0"
-      >
+  style={{ y: videoY, scale: videoScale, willChange: "transform" }}
+  className="absolute inset-0 transform-gpu"
+>
         <video
           className="h-full w-full object-cover opacity-50"
           autoPlay
