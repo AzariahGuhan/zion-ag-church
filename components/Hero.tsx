@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
-const letters = "ZION AG CHURCH".split("");
+const words = ["ZION AG", "CHURCH"];
 
 export default function Hero() {
   return (
@@ -33,24 +33,42 @@ export default function Hero() {
           Welcome to
         </motion.p>
 
-        <h1 className="flex justify-center text-6xl font-extrabold sm:text-8xl md:text-9xl">
-          {letters.map((ch, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0, y: 60 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 + i * 0.08, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className={ch === " " ? "w-4 sm:w-8" : ""}
-            >
-              {ch === " " ? "\u00A0" : ch}
-            </motion.span>
-          ))}
+        <h1 className="flex flex-col items-center font-extrabold">
+          {words.map((word, w) => {
+            const offset = w === 0 ? 0 : words[0].length;
+            return (
+              <span
+                key={word}
+                className={`flex justify-center ${
+                  w === 0
+                    ? "text-6xl sm:text-8xl md:text-9xl"
+                    : "mt-2 text-3xl tracking-[0.4em] sm:text-5xl md:text-6xl"
+                }`}
+              >
+                {word.split("").map((ch, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0, y: 60 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: 0.4 + (offset + i) * 0.08,
+                      duration: 0.8,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className={ch === " " ? "w-4 sm:w-8" : ""}
+                  >
+                    {ch === " " ? "\u00A0" : ch}
+                  </motion.span>
+                ))}
+              </span>
+            );
+          })}
         </h1>
 
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.4, duration: 1 }}
+          transition={{ delay: 1.8, duration: 1 }}
           className="mx-auto mt-6 max-w-xl text-base text-white/80 sm:text-lg"
         >
           A place to belong, believe and become.
@@ -59,7 +77,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.7, duration: 0.8 }}
+          transition={{ delay: 2.1, duration: 0.8 }}
           className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
           <a
