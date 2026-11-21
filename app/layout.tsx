@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Montserrat } from "next/font/google";
+import SmoothScroll from "@/components/SmoothScroll";
+import ScrollProgress from "@/components/ScrollProgress";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -25,12 +27,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      data-scroll-behavior="smooth"
-      className={`${montserrat.variable} ${bebas.variable}`}
-    >
-      <body className="antialiased">{children}</body>
+    <html lang="en" className={`${montserrat.variable} ${bebas.variable}`}>
+      <body className="antialiased">
+        <SmoothScroll />
+        <ScrollProgress />
+        {children}
+      </body>
     </html>
   );
 }

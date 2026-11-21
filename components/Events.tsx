@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
+import Reveal from "@/components/Reveal";
+import RevealText from "@/components/RevealText";
 import Lightbox from "@/components/Lightbox";
 
 type EventItem = {
@@ -46,50 +48,51 @@ export default function Events() {
     <section id="events" className="bg-black px-6 py-28 text-white">
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
-          <p className="mb-4 text-xs uppercase tracking-[0.5em] text-white/60">
-            What&apos;s Happening
-          </p>
-          <h2 className="text-4xl font-bold sm:text-5xl">Upcoming Events</h2>
+          <Reveal y={20}>
+            <p className="mb-4 text-xs uppercase tracking-[0.5em] text-white/60">
+              What&apos;s Happening
+            </p>
+          </Reveal>
+          <RevealText text="Upcoming" accent="Events" />
         </div>
 
         {events.length > 0 ? (
           <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {events.map((e) => (
-              <div
-                key={e.title}
-                className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
-              >
-                <button
-                  type="button"
-                  onClick={() =>
-                    setActive({ src: e.poster, alt: `${e.title} poster` })
-                  }
-                  aria-label={`Open ${e.title} poster full size`}
-                  className="block w-full cursor-zoom-in"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={e.poster}
-                    alt={`${e.title} poster`}
-                    loading="lazy"
-                    className="w-full object-cover transition duration-500 hover:scale-[1.02]"
-                  />
-                </button>
-                <div className="p-5">
-                  <h3 className="text-xl font-semibold">{e.title}</h3>
-                  {(e.date || e.time) && (
-                    <p className="mt-2 text-sm uppercase tracking-widest text-white/60">
-                      {[e.date, e.time].filter(Boolean).join(" · ")}
-                    </p>
-                  )}
-                  {e.place && <p className="mt-2 text-white/80">{e.place}</p>}
-                  {e.text && (
-                    <p className="mt-2 text-sm leading-6 text-white/70">
-                      {e.text}
-                    </p>
-                  )}
+            {events.map((e, i) => (
+              <Reveal key={e.title} delay={(i % 4) * 0.1} className="h-full">
+                <div className="h-full overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setActive({ src: e.poster, alt: `${e.title} poster` })
+                    }
+                    aria-label={`Open ${e.title} poster full size`}
+                    className="block w-full cursor-zoom-in overflow-hidden"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={e.poster}
+                      alt={`${e.title} poster`}
+                      loading="lazy"
+                      className="w-full object-cover transition duration-700 hover:scale-[1.04]"
+                    />
+                  </button>
+                  <div className="p-5">
+                    <h3 className="text-3xl">{e.title}</h3>
+                    {(e.date || e.time) && (
+                      <p className="mt-2 text-sm uppercase tracking-widest text-white/60">
+                        {[e.date, e.time].filter(Boolean).join(" · ")}
+                      </p>
+                    )}
+                    {e.place && <p className="mt-2 text-white/80">{e.place}</p>}
+                    {e.text && (
+                      <p className="mt-2 text-sm leading-6 text-white/70">
+                        {e.text}
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         ) : (

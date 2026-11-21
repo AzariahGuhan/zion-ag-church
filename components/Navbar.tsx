@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 const mainLinks = [
   { label: "About", href: "/about" },
   { label: "Sermons", href: "/sermons" },
@@ -41,7 +43,7 @@ function Logo({ onClick }: { onClick?: () => void }) {
     <Link
       href="/"
       onClick={onClick}
-      className="whitespace-nowrap text-lg font-medium tracking-tight text-white"
+      className="font-display whitespace-nowrap text-3xl uppercase tracking-wide text-white"
     >
       Zion AG <span className="accent">Church</span>
     </Link>
@@ -74,8 +76,11 @@ export default function Navbar() {
 
   return (
     <>
-      <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+      <motion.header
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.9, ease }}
+        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,padding] duration-500 ${
           scrolled ? "bg-black/50 py-3 backdrop-blur-md" : "bg-transparent py-5"
         }`}
       >
@@ -102,13 +107,14 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <Link
               href="/live"
-              className="hidden items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-white/80 transition hover:bg-white/10 md:flex"
+              className="hidden items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-white/80 hover:bg-white/10 md:flex"
             >
-              <span className="h-2 w-2 rounded-full bg-red-500" /> Live
+              <span className="h-2 w-2 animate-pulse rounded-full bg-red-500" />{" "}
+              Live
             </Link>
             <Link
               href="/give"
-              className="hidden rounded-full bg-white px-5 py-2 text-sm font-medium text-black transition hover:bg-white/85 md:block"
+              className="hidden rounded-full bg-white px-5 py-2 text-sm font-medium text-black hover:bg-white/85 md:block"
             >
               Give
             </Link>
@@ -121,15 +127,16 @@ export default function Navbar() {
             </button>
           </div>
         </nav>
-      </header>
+      </motion.header>
 
       <AnimatePresence>
         {open && (
           <motion.div
+            data-lenis-prevent
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.35, ease }}
             className="fixed inset-0 z-[60] overflow-y-auto bg-[#060606]"
           >
             <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
@@ -137,7 +144,7 @@ export default function Navbar() {
               <button
                 aria-label="Close menu"
                 onClick={() => setOpen(false)}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition hover:bg-white/10"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition duration-500 hover:rotate-90 hover:bg-white/10"
               >
                 <X size={20} />
               </button>
@@ -148,14 +155,14 @@ export default function Navbar() {
                 {mainLinks.map((l, i) => (
                   <motion.li
                     key={l.href}
-                    initial={{ y: 30, opacity: 0 }}
+                    initial={{ y: 40, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.05 * i, duration: 0.5 }}
+                    transition={{ delay: 0.06 * i + 0.1, duration: 0.7, ease }}
                   >
                     <Link
                       href={l.href}
                       onClick={() => setOpen(false)}
-                      className="block text-4xl tracking-tight text-white transition hover:text-white/50 sm:text-6xl"
+                      className="font-display block text-6xl uppercase tracking-wide text-white transition duration-500 hover:translate-x-3 hover:text-white/50 sm:text-8xl"
                     >
                       {l.label}
                     </Link>
@@ -163,7 +170,12 @@ export default function Navbar() {
                 ))}
               </ul>
 
-              <div className="space-y-10">
+              <motion.div
+                className="space-y-10"
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.8, ease }}
+              >
                 <div>
                   <p className="text-xs uppercase tracking-[0.5em]">Get Started</p>
                   <ul className="mt-5 space-y-3">
@@ -198,7 +210,7 @@ export default function Navbar() {
                     ))}
                   </ul>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         )}
