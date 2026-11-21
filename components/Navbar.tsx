@@ -4,19 +4,33 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X, Gift, ArrowUpRight } from "lucide-react";
+import {
+  Menu,
+  X,
+  Info,
+  BookOpen,
+  Radio,
+  CalendarDays,
+  Users,
+  Camera,
+  Gift,
+  Phone,
+  HeartHandshake,
+  MapPin,
+  ArrowUpRight,
+} from "lucide-react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const mainLinks = [
-  { label: "About", href: "/about" },
-  { label: "Sermons", href: "/sermons" },
-  { label: "Live Stream", href: "/live" },
-  { label: "Events", href: "/events" },
-  { label: "Ministries", href: "/ministries" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Give", href: "/give" },
-  { label: "Contact", href: "/contact" },
+  { label: "About", href: "/about", icon: Info },
+  { label: "Sermons", href: "/sermons", icon: BookOpen },
+  { label: "Live Stream", href: "/live", icon: Radio },
+  { label: "Events", href: "/events", icon: CalendarDays },
+  { label: "Ministries", href: "/ministries", icon: Users },
+  { label: "Gallery", href: "/gallery", icon: Camera },
+  { label: "Give", href: "/give", icon: Gift },
+  { label: "Contact", href: "/contact", icon: Phone },
 ];
 
 const centerLinks = [
@@ -28,15 +42,67 @@ const centerLinks = [
 ];
 
 const quickLinks = [
-  { label: "Need Prayer", href: "/prayer" },
-  { label: "Plan Your Visit", href: "/about#services" },
+  { label: "Need Prayer", href: "/prayer", icon: HeartHandshake },
+  { label: "Plan Your Visit", href: "/about#services", icon: MapPin },
 ];
 
-const social = [
-  { label: "YouTube", href: "https://www.youtube.com/@zionagchennaiofficial" },
-  { label: "Instagram", href: "https://instagram.com/zion_ag_church" },
-  { label: "Facebook", href: "https://www.facebook.com/zionagchurch.kamarajapuram" },
+type SocialName = "youtube" | "instagram" | "facebook";
+
+const social: { label: string; href: string; name: SocialName }[] = [
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/@zionagchennaiofficial",
+    name: "youtube",
+  },
+  {
+    label: "Instagram",
+    href: "https://instagram.com/zion_ag_church",
+    name: "instagram",
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/zionagchurch.kamarajapuram",
+    name: "facebook",
+  },
 ];
+
+function SocialIcon({ name }: { name: SocialName }) {
+  const common = {
+    width: 17,
+    height: 17,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.5,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    className: "shrink-0 text-white/45",
+    "aria-hidden": true,
+  };
+
+  if (name === "youtube") {
+    return (
+      <svg {...common}>
+        <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
+        <path d="m10 15 5-3-5-3z" />
+      </svg>
+    );
+  }
+  if (name === "instagram") {
+    return (
+      <svg {...common}>
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+      </svg>
+    );
+  }
+  return (
+    <svg {...common}>
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  );
+}
 
 function Logo({ onClick }: { onClick?: () => void }) {
   return (
@@ -164,8 +230,13 @@ export default function Navbar() {
                     <Link
                       href={l.href}
                       onClick={() => setOpen(false)}
-                      className="group flex items-center gap-5 py-3 text-white"
+                      className="group flex items-center gap-4 py-3 text-white"
                     >
+                      <l.icon
+                        size={18}
+                        strokeWidth={1.5}
+                        className="shrink-0 text-white/45 transition duration-500 group-hover:text-white"
+                      />
                       <span className="font-display text-3xl uppercase leading-none tracking-wide transition duration-500 group-hover:translate-x-1.5 sm:text-4xl">
                         {l.label}
                       </span>
@@ -197,8 +268,13 @@ export default function Navbar() {
                         <Link
                           href={l.href}
                           onClick={() => setOpen(false)}
-                          className="text-base text-white/80 transition hover:text-white"
+                          className="flex items-center gap-3 text-base text-white/80 transition hover:text-white"
                         >
+                          <l.icon
+                            size={17}
+                            strokeWidth={1.5}
+                            className="text-white/45"
+                          />
                           {l.label}
                         </Link>
                       </li>
@@ -217,9 +293,14 @@ export default function Navbar() {
                           href={s.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-base text-white/80 transition hover:text-white"
+                          className="group flex items-center gap-3 text-base text-white/80 transition hover:text-white"
                         >
+                          <SocialIcon name={s.name} />
                           {s.label}
+                          <ArrowUpRight
+                            size={16}
+                            className="ml-auto text-white/40 transition duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white"
+                          />
                         </a>
                       </li>
                     ))}
