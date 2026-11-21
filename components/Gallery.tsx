@@ -2,46 +2,7 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-
-type Photo = { src: string; alt: string };
-type Album = { id: string; name: string; photos: Photo[] };
-
-// Add each photo's file name to its album. Albums with no photos stay hidden.
-const albums: Album[] = [
-  {
-    id: "christmas-2026",
-    name: "Christmas 2026",
-    photos: [
-      { src: "/gallery/christmas-2026/photo1.jpg", alt: "Christmas 2026 celebration" },
-      { src: "/gallery/christmas-2026/photo2.jpg", alt: "Christmas 2026 celebration" },
-      { src: "/gallery/christmas-2026/photo3.jpg", alt: "Christmas 2026 celebration" },
-      { src: "/gallery/christmas-2026/photo4.jpg", alt: "Christmas 2026 celebration" },
-      { src: "/gallery/christmas-2026/photo5.jpg", alt: "Christmas 2026 celebration" },
-      { src: "/gallery/christmas-2026/photo6.jpg", alt: "Christmas 2026 celebration" },
-    ],
-  },
-  {
-    id: "new-year",
-    name: "New Year",
-    photos: [
-      // { src: "/gallery/new-year/photo1.jpg", alt: "New Year service" },
-    ],
-  },
-  {
-    id: "annual-convention",
-    name: "Annual Convention",
-    photos: [
-      // { src: "/gallery/annual-convention/photo1.jpg", alt: "Annual Convention" },
-    ],
-  },
-  {
-    id: "holy-spirit-conference",
-    name: "Holy Spirit Conference",
-    photos: [
-      // { src: "/gallery/holy-spirit-conference/photo1.jpg", alt: "Holy Spirit Conference" },
-    ],
-  },
-];
+import { albums } from "@/lib/gallery";
 
 export default function Gallery() {
   const filled = albums.filter((a) => a.photos.length > 0);
@@ -68,7 +29,6 @@ export default function Gallery() {
           <h2 className="text-4xl font-bold sm:text-5xl">Gallery</h2>
         </div>
 
-        {/* Album tabs */}
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           {filled.map((a) => (
             <button
@@ -89,7 +49,6 @@ export default function Gallery() {
           ))}
         </div>
 
-        {/* Photo grid */}
         <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3">
           {photos.map((p, i) => (
             <button
@@ -110,7 +69,6 @@ export default function Gallery() {
         </div>
       </div>
 
-      {/* Full-size viewer */}
       {openIndex !== null && (
         <div
           className="fixed inset-0 z-[60] flex items-center justify-center bg-black/95 p-4"

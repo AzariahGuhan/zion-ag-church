@@ -4,9 +4,9 @@ import About from "@/components/About";
 import Services from "@/components/Services";
 import Events from "@/components/Events";
 import Ministries from "@/components/Ministries";
-import Sermons from "@/components/Sermons";
-import Gallery from "@/components/Gallery";
-import Give from "@/components/Give";
+import SermonsPreview from "@/components/SermonsPreview";
+import GalleryPreview from "@/components/GalleryPreview";
+import GiveTeaser from "@/components/GiveTeaser";
 import Prayer from "@/components/Prayer";
 import Contact from "@/components/Contact";
 
@@ -19,9 +19,9 @@ export default function Home() {
       <Services />
       <Events />
       <Ministries />
-      <Sermons />
-      <Gallery />
-      <Give />
+      <SermonsPreview />
+      <GalleryPreview />
+      <GiveTeaser />
       <Prayer />
       <Contact />
     </main>

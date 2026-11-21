@@ -1,20 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const links = [
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Events", href: "#events" },
-  { label: "Ministries", href: "#ministries" },
-  { label: "Sermons", href: "#sermons" },
+  { label: "About", href: "/#about" },
+  { label: "Services", href: "/#services" },
+  { label: "Events", href: "/#events" },
+  { label: "Ministries", href: "/#ministries" },
+  { label: "Sermons", href: "/sermons" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Give", href: "/give" },
+  { label: "Prayer", href: "/#prayer" },
+  { label: "Contact", href: "/#contact" },
   { label: "Live", href: "/live" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Give", href: "#give" },
-  { label: "Prayer", href: "#prayer" },
-  { label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
@@ -43,19 +44,25 @@ export default function Navbar() {
         }`}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6">
-          <a href="#top" className="text-lg font-bold tracking-[0.3em] text-white">
+          <Link href="/" className="text-lg font-bold tracking-[0.3em] text-white">
             ZION AG
-          </a>
+          </Link>
 
-          <ul className="hidden items-center gap-8 md:flex">
+          <ul className="hidden items-center gap-6 xl:flex">
             {links.map((l) => (
               <li key={l.href}>
-                <a
+                <Link
                   href={l.href}
                   className="text-sm uppercase tracking-widest text-white/80 transition hover:text-white"
                 >
-                  {l.label}
-                </a>
+                  {l.label === "Live" ? (
+                    <span className="flex items-center gap-2">
+                      <span className="h-2 w-2 rounded-full bg-red-500" /> Live
+                    </span>
+                  ) : (
+                    l.label
+                  )}
+                </Link>
               </li>
             ))}
           </ul>
@@ -63,7 +70,7 @@ export default function Navbar() {
           <button
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((o) => !o)}
-            className="z-50 text-white md:hidden"
+            className="z-50 text-white xl:hidden"
           >
             {open ? <X size={28} /> : <Menu size={28} />}
           </button>
@@ -77,20 +84,23 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-black/95"
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-5 overflow-y-auto bg-black/95 py-20"
           >
             {links.map((l, i) => (
-              <motion.a
+              <motion.div
                 key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.08 * i, duration: 0.5 }}
-                className="text-3xl font-semibold uppercase tracking-widest text-white"
+                transition={{ delay: 0.06 * i, duration: 0.5 }}
               >
-                {l.label}
-              </motion.a>
+                <Link
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="text-2xl font-semibold uppercase tracking-widest text-white"
+                >
+                  {l.label}
+                </Link>
+              </motion.div>
             ))}
           </motion.div>
         )}
