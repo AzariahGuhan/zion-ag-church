@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
 });
 
@@ -18,12 +18,18 @@ export const metadata: Metadata = {
     "Zion AG Church in Kamarajapuram, Sembakkam, Tambaram. Join us for Sunday services, fellowships and prayer, or watch our services online.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    < html
-    lang="en" data-scroll-behavior="smooth" className="..."
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${inter.variable} ${playfair.variable}`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }
