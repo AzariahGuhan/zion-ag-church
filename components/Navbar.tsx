@@ -44,9 +44,12 @@ export default function Navbar() {
         }`}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6">
-          <Link href="/" className="text-lg font-bold tracking-[0.3em] text-white">
-            ZION AG
-          </Link>
+          <Link
+  href="/"
+  className="whitespace-nowrap text-sm font-bold tracking-[0.2em] text-white sm:text-lg"
+>
+  ZION AG CHURCH
+</Link>
 
           <ul className="hidden items-center gap-6 xl:flex">
             {links.map((l) => (

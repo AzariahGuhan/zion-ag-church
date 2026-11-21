@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
-const words = ["ZION AG", "CHURCH"];
+const letters = "ZION AG CHURCH".split("");
 
 export default function Hero() {
   return (
@@ -11,7 +11,7 @@ export default function Hero() {
       id="top"
       className="relative flex h-screen min-h-[600px] items-center justify-center overflow-hidden bg-gradient-to-b from-neutral-900 via-neutral-950 to-black"
     >
-      {/* Background video: add /public/media/hero.mp4 and it will play automatically */}
+      {/* Background video: /public/media/hero.mp4 */}
       <video
         className="absolute inset-0 h-full w-full object-cover opacity-60"
         autoPlay
@@ -23,7 +23,7 @@ export default function Hero() {
       </video>
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/80" />
 
-      <div className="relative z-10 px-6 text-center text-white">
+      <div className="relative z-10 px-4 text-center text-white">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -33,42 +33,27 @@ export default function Hero() {
           Welcome to
         </motion.p>
 
-        <h1 className="flex flex-col items-center font-extrabold">
-          {words.map((word, w) => {
-            const offset = w === 0 ? 0 : words[0].length;
-            return (
-              <span
-                key={word}
-                className={`flex justify-center ${
-                  w === 0
-                    ? "text-6xl sm:text-8xl md:text-9xl"
-                    : "mt-2 text-3xl tracking-[0.4em] sm:text-5xl md:text-6xl"
-                }`}
-              >
-                {word.split("").map((ch, i) => (
-                  <motion.span
-                    key={i}
-                    initial={{ opacity: 0, y: 60 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      delay: 0.4 + (offset + i) * 0.08,
-                      duration: 0.8,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    className={ch === " " ? "w-4 sm:w-8" : ""}
-                  >
-                    {ch === " " ? "\u00A0" : ch}
-                  </motion.span>
-                ))}
-              </span>
-            );
-          })}
+        <h1 className="flex justify-center whitespace-nowrap text-[8.5vw] font-extrabold sm:text-6xl md:text-7xl lg:text-8xl">
+          {letters.map((ch, i) => (
+            <motion.span
+              key={i}
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: 0.4 + i * 0.07,
+                duration: 0.8,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              {ch === " " ? "\u00A0" : ch}
+            </motion.span>
+          ))}
         </h1>
 
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.8, duration: 1 }}
+          transition={{ delay: 1.6, duration: 1 }}
           className="mx-auto mt-6 max-w-xl text-base text-white/80 sm:text-lg"
         >
           A place to belong, believe and become.
@@ -77,7 +62,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.1, duration: 0.8 }}
+          transition={{ delay: 1.9, duration: 0.8 }}
           className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
           <a
