@@ -6,6 +6,7 @@ export const viewport: Viewport = {
 import { Bebas_Neue, Montserrat } from "next/font/google";
 import SmoothScroll from "@/components/SmoothScroll";
 import ScrollProgress from "@/components/ScrollProgress";
+import SwipeBack from "@/components/SwipeBack";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -35,6 +36,7 @@ export default function RootLayout({
       <body className="antialiased">
         <SmoothScroll />
         <ScrollProgress />
+        <SwipeBack />
         {children}
       </body>
     </html>
