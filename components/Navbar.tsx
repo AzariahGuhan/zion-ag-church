@@ -4,19 +4,32 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import {
+  Menu,
+  X,
+  Info,
+  BookOpen,
+  Radio,
+  CalendarDays,
+  Users,
+  Camera,
+  Gift,
+  Phone,
+  HeartHandshake,
+  MapPin,
+} from "lucide-react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const mainLinks = [
-  { label: "About", href: "/about" },
-  { label: "Sermons", href: "/sermons" },
-  { label: "Live Stream", href: "/live" },
-  { label: "Events", href: "/events" },
-  { label: "Ministries", href: "/ministries" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Give", href: "/give" },
-  { label: "Contact", href: "/contact" },
+  { label: "About", href: "/about", icon: Info },
+  { label: "Sermons", href: "/sermons", icon: BookOpen },
+  { label: "Live Stream", href: "/live", icon: Radio },
+  { label: "Events", href: "/events", icon: CalendarDays },
+  { label: "Ministries", href: "/ministries", icon: Users },
+  { label: "Gallery", href: "/gallery", icon: Camera },
+  { label: "Give", href: "/give", icon: Gift },
+  { label: "Contact", href: "/contact", icon: Phone },
 ];
 
 const centerLinks = [
@@ -28,8 +41,8 @@ const centerLinks = [
 ];
 
 const quickLinks = [
-  { label: "Need Prayer", href: "/prayer" },
-  { label: "Plan Your Visit", href: "/about#services" },
+  { label: "Need Prayer", href: "/prayer", icon: HeartHandshake },
+  { label: "Plan Your Visit", href: "/about#services", icon: MapPin },
 ];
 
 const social = [
@@ -81,13 +94,13 @@ export default function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.9, ease }}
         className={`fixed inset-x-0 top-0 z-50 transition-[background-color,padding] duration-500 ${
-          scrolled ? "bg-black/50 py-3 backdrop-blur-md" : "bg-transparent py-5"
+          scrolled ? "bg-black/75 py-3" : "bg-transparent py-5"
         }`}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6">
           <Logo />
 
-          <ul className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur-md lg:flex">
+          <ul className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1 lg:flex">
             {centerLinks.map((l) => (
               <li key={l.href}>
                 <Link
@@ -114,8 +127,9 @@ export default function Navbar() {
             </Link>
             <Link
               href="/give"
-              className="hidden rounded-full bg-white px-5 py-2 text-sm font-medium text-black hover:bg-white/85 md:block"
+              className="hidden items-center gap-2 rounded-full bg-white px-5 py-2 text-sm font-medium text-black hover:bg-white/85 md:flex"
             >
+              <Gift size={16} />
               Give
             </Link>
             <button
@@ -162,8 +176,11 @@ export default function Navbar() {
                     <Link
                       href={l.href}
                       onClick={() => setOpen(false)}
-                      className="font-display block text-6xl uppercase tracking-wide text-white transition duration-500 hover:translate-x-3 hover:text-white/50 sm:text-8xl"
+                      className="font-display group flex items-center gap-5 text-6xl uppercase tracking-wide text-white transition duration-500 hover:translate-x-3 hover:text-white/50 sm:text-8xl"
                     >
+                      <span className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/15 text-white/60 transition duration-500 group-hover:border-white/40 group-hover:text-white sm:flex">
+                        <l.icon size={20} />
+                      </span>
                       {l.label}
                     </Link>
                   </motion.li>
@@ -184,8 +201,9 @@ export default function Navbar() {
                         <Link
                           href={l.href}
                           onClick={() => setOpen(false)}
-                          className="text-xl text-white/90 transition hover:text-white/50"
+                          className="flex items-center gap-3 text-xl text-white/90 transition hover:text-white/50"
                         >
+                          <l.icon size={20} className="text-white/50" />
                           {l.label}
                         </Link>
                       </li>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
+import { CalendarDays, Clock, MapPin, Maximize2 } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import RevealText from "@/components/RevealText";
 import Lightbox from "@/components/Lightbox";
@@ -50,6 +51,7 @@ export default function Events() {
         <div className="text-center">
           <Reveal y={20}>
             <p className="mb-4 text-xs uppercase tracking-[0.5em] text-white/60">
+              <CalendarDays size={14} />
               What&apos;s Happening
             </p>
           </Reveal>
@@ -67,26 +69,41 @@ export default function Events() {
                       setActive({ src: e.poster, alt: `${e.title} poster` })
                     }
                     aria-label={`Open ${e.title} poster full size`}
-                    className="block w-full cursor-zoom-in overflow-hidden"
+                    className="group relative block w-full cursor-zoom-in overflow-hidden"
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={e.poster}
                       alt={`${e.title} poster`}
                       loading="lazy"
-                      className="w-full object-cover transition duration-700 hover:scale-[1.04]"
+                      className="w-full object-cover transition duration-700 group-hover:scale-[1.04]"
                     />
+                    <span className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white opacity-0 transition duration-300 group-hover:opacity-100">
+                      <Maximize2 size={16} />
+                    </span>
                   </button>
                   <div className="p-5">
                     <h3 className="text-3xl">{e.title}</h3>
-                    {(e.date || e.time) && (
-                      <p className="mt-2 text-sm uppercase tracking-widest text-white/60">
-                        {[e.date, e.time].filter(Boolean).join(" · ")}
+                    {e.date && (
+                      <p className="mt-3 flex items-center gap-2 text-sm text-white/70">
+                        <CalendarDays size={16} className="shrink-0 text-white/50" />
+                        {e.date}
                       </p>
                     )}
-                    {e.place && <p className="mt-2 text-white/80">{e.place}</p>}
+                    {e.time && (
+                      <p className="mt-2 flex items-center gap-2 text-sm text-white/70">
+                        <Clock size={16} className="shrink-0 text-white/50" />
+                        {e.time}
+                      </p>
+                    )}
+                    {e.place && (
+                      <p className="mt-2 flex items-center gap-2 text-sm text-white/70">
+                        <MapPin size={16} className="shrink-0 text-white/50" />
+                        {e.place}
+                      </p>
+                    )}
                     {e.text && (
-                      <p className="mt-2 text-sm leading-6 text-white/70">
+                      <p className="mt-3 text-sm leading-6 text-white/70">
                         {e.text}
                       </p>
                     )}

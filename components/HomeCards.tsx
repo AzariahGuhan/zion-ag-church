@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Church, Users, CalendarDays, HeartHandshake } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import RevealText from "@/components/RevealText";
 
@@ -8,21 +8,25 @@ const cards = [
     title: "Plan Your Visit",
     text: "Service times and how to find us.",
     href: "/about#services",
+    icon: Church,
   },
   {
     title: "Ministries",
     text: "Sunday school, youth, women and men.",
     href: "/ministries",
+    icon: Users,
   },
   {
     title: "Events",
     text: "What is coming up at Zion AG.",
     href: "/events",
+    icon: CalendarDays,
   },
   {
     title: "Need Prayer?",
     text: "Share your request. We will pray with you.",
     href: "/prayer",
+    icon: HeartHandshake,
   },
 ];
 
@@ -46,10 +50,15 @@ export default function HomeCards() {
                 href={c.href}
                 className="group flex h-full min-h-[220px] flex-col justify-between rounded-2xl border border-white/10 bg-white/5 p-8"
               >
-                <ArrowUpRight
-                  size={28}
-                  className="self-end text-white/60 transition duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white"
-                />
+                <div className="flex items-start justify-between">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition duration-500 group-hover:scale-110 group-hover:border-white/40">
+                    <c.icon size={26} strokeWidth={1.5} />
+                  </span>
+                  <ArrowUpRight
+                    size={28}
+                    className="text-white/60 transition duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white"
+                  />
+                </div>
                 <div>
                   <h3 className="text-4xl">{c.title}</h3>
                   <p className="mt-2 text-white/70">{c.text}</p>
