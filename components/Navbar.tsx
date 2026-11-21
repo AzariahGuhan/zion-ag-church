@@ -4,32 +4,19 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  Menu,
-  X,
-  Info,
-  BookOpen,
-  Radio,
-  CalendarDays,
-  Users,
-  Camera,
-  Gift,
-  Phone,
-  HeartHandshake,
-  MapPin,
-} from "lucide-react";
+import { Menu, X, Gift, ArrowUpRight } from "lucide-react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const mainLinks = [
-  { label: "About", href: "/about", icon: Info },
-  { label: "Sermons", href: "/sermons", icon: BookOpen },
-  { label: "Live Stream", href: "/live", icon: Radio },
-  { label: "Events", href: "/events", icon: CalendarDays },
-  { label: "Ministries", href: "/ministries", icon: Users },
-  { label: "Gallery", href: "/gallery", icon: Camera },
-  { label: "Give", href: "/give", icon: Gift },
-  { label: "Contact", href: "/contact", icon: Phone },
+  { label: "About", href: "/about" },
+  { label: "Sermons", href: "/sermons" },
+  { label: "Live Stream", href: "/live" },
+  { label: "Events", href: "/events" },
+  { label: "Ministries", href: "/ministries" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Give", href: "/give" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const centerLinks = [
@@ -41,8 +28,8 @@ const centerLinks = [
 ];
 
 const quickLinks = [
-  { label: "Need Prayer", href: "/prayer", icon: HeartHandshake },
-  { label: "Plan Your Visit", href: "/about#services", icon: MapPin },
+  { label: "Need Prayer", href: "/prayer" },
+  { label: "Plan Your Visit", href: "/about#services" },
 ];
 
 const social = [
@@ -164,46 +151,54 @@ export default function Navbar() {
               </button>
             </div>
 
-            <div className="mx-auto grid max-w-7xl gap-12 px-6 pb-16 pt-6 md:grid-cols-[2fr_1fr]">
-              <ul className="space-y-1">
+            <div className="mx-auto grid max-w-5xl gap-14 px-6 pb-16 pt-8 md:grid-cols-[1.4fr_1fr] md:gap-24">
+              <ul className="border-t border-white/10">
                 {mainLinks.map((l, i) => (
                   <motion.li
                     key={l.href}
-                    initial={{ y: 40, opacity: 0 }}
+                    initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.06 * i + 0.1, duration: 0.7, ease }}
+                    transition={{ delay: 0.04 * i + 0.1, duration: 0.6, ease }}
+                    className="border-b border-white/10"
                   >
                     <Link
                       href={l.href}
                       onClick={() => setOpen(false)}
-                      className="font-display group flex items-center gap-5 text-6xl uppercase tracking-wide text-white transition duration-500 hover:translate-x-3 hover:text-white/50 sm:text-8xl"
+                      className="group flex items-center gap-5 py-3 text-white"
                     >
-                      <span className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/15 text-white/60 transition duration-500 group-hover:border-white/40 group-hover:text-white sm:flex">
-                        <l.icon size={20} />
+                      <span className="font-display text-3xl uppercase leading-none tracking-wide transition duration-500 group-hover:translate-x-1.5 sm:text-4xl">
+                        {l.label}
                       </span>
-                      {l.label}
+                      {pathname === l.href && (
+                        <span className="h-1.5 w-1.5 rounded-full bg-white" />
+                      )}
+                      <ArrowUpRight
+                        size={20}
+                        className="ml-auto text-white/0 transition duration-500 group-hover:text-white/70"
+                      />
                     </Link>
                   </motion.li>
                 ))}
               </ul>
 
               <motion.div
-                className="space-y-10"
-                initial={{ y: 30, opacity: 0 }}
+                initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.8, ease }}
+                transition={{ delay: 0.45, duration: 0.7, ease }}
+                className="space-y-12 md:pt-3"
               >
                 <div>
-                  <p className="text-xs uppercase tracking-[0.5em]">Get Started</p>
+                  <p className="text-[11px] uppercase tracking-[0.3em] text-white/40">
+                    Get Started
+                  </p>
                   <ul className="mt-5 space-y-3">
                     {quickLinks.map((l) => (
                       <li key={l.href}>
                         <Link
                           href={l.href}
                           onClick={() => setOpen(false)}
-                          className="flex items-center gap-3 text-xl text-white/90 transition hover:text-white/50"
+                          className="text-base text-white/80 transition hover:text-white"
                         >
-                          <l.icon size={20} className="text-white/50" />
                           {l.label}
                         </Link>
                       </li>
@@ -212,7 +207,9 @@ export default function Navbar() {
                 </div>
 
                 <div>
-                  <p className="text-xs uppercase tracking-[0.5em]">Follow Us</p>
+                  <p className="text-[11px] uppercase tracking-[0.3em] text-white/40">
+                    Follow Us
+                  </p>
                   <ul className="mt-5 space-y-3">
                     {social.map((s) => (
                       <li key={s.label}>
@@ -220,7 +217,7 @@ export default function Navbar() {
                           href={s.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-xl text-white/90 transition hover:text-white/50"
+                          className="text-base text-white/80 transition hover:text-white"
                         >
                           {s.label}
                         </a>
